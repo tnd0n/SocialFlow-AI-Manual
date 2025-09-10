@@ -3,9 +3,23 @@ import asyncio
 import os
 import random
 from typing import List, Dict, Any, Optional
-from llm_providers.openai_provider import OpenAIProvider
-from llm_providers.perplexity_provider import PerplexityProvider
-from llm_providers.gemini_provider import GeminiProvider
+
+# Optional imports for API providers
+try:
+    from llm_providers.openai_provider import OpenAIProvider
+except ImportError:
+    OpenAIProvider = None
+
+try:
+    from llm_providers.perplexity_provider import PerplexityProvider
+except ImportError:
+    PerplexityProvider = None
+
+try:
+    from llm_providers.gemini_provider import GeminiProvider
+except ImportError:
+    GeminiProvider = None
+
 from llm_providers.web_providers import PerplexityWebProvider, ChatGPTWebProvider, GeminiWebProvider
 from backend.utils.logger import get_logger
 
@@ -35,34 +49,37 @@ class EnhancedLLMManager:
         """Initialize API-based providers with multiple keys"""
         try:
             # OpenAI with multiple keys
-            openai_keys = os.getenv("OPENAI_API_KEYS", "").split(",")
-            for key in openai_keys:
-                if key.strip():
-                    provider = OpenAIProvider()
-                    provider.api_key = key.strip()
-                    self.api_providers.append(provider)
+            if OpenAIProvider:
+                openai_keys = os.getenv("OPENAI_API_KEYS", "").split(",")
+                for key in openai_keys:
+                    if key.strip():
+                        provider = OpenAIProvider()
+                        provider.api_key = key.strip()
+                        self.api_providers.append(provider)
         except Exception as e:
             log.warning(f"Failed to init OpenAI providers: {e}")
 
         try:
             # Perplexity with multiple keys
-            perplexity_keys = os.getenv("PERPLEXITY_API_KEYS", "").split(",")
-            for key in perplexity_keys:
-                if key.strip():
-                    provider = PerplexityProvider()
-                    provider._keys = [key.strip()]
-                    self.api_providers.append(provider)
+            if PerplexityProvider:
+                perplexity_keys = os.getenv("PERPLEXITY_API_KEYS", "").split(",")
+                for key in perplexity_keys:
+                    if key.strip():
+                        provider = PerplexityProvider()
+                        provider.api_key = key.strip()
+                        self.api_providers.append(provider)
         except Exception as e:
             log.warning(f"Failed to init Perplexity providers: {e}")
 
         try:
             # Gemini with multiple keys
-            gemini_keys = os.getenv("GEMINI_API_KEYS", "").split(",")
-            for key in gemini_keys:
-                if key.strip():
-                    provider = GeminiProvider()
-                    provider._keys = [key.strip()]
-                    self.api_providers.append(provider)
+            if GeminiProvider:
+                gemini_keys = os.getenv("GEMINI_API_KEYS", "").split(",")
+                for key in gemini_keys:
+                    if key.strip():
+                        provider = GeminiProvider()
+                        provider.api_key = key.strip()
+                        self.api_providers.append(provider)
         except Exception as e:
             log.warning(f"Failed to init Gemini providers: {e}")
 

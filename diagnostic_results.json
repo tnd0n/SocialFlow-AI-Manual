@@ -1,0 +1,218 @@
+{
+  "timestamp": "2025-09-10T16:42:44.844322",
+  "overall_status": "PASS",
+  "tests": {
+    "llm_providers": {
+      "success": true,
+      "results": {
+        "api_providers": [
+          {
+            "name": "OpenAIProvider",
+            "type": "API",
+            "status": "\u2705 ACTIVE",
+            "has_key": true
+          },
+          {
+            "name": "OpenAIProvider",
+            "type": "API",
+            "status": "\u2705 ACTIVE",
+            "has_key": true
+          },
+          {
+            "name": "OpenAIProvider",
+            "type": "API",
+            "status": "\u2705 ACTIVE",
+            "has_key": true
+          },
+          {
+            "name": "PerplexityProvider",
+            "type": "API",
+            "status": "\u2705 ACTIVE",
+            "has_key": true
+          },
+          {
+            "name": "GeminiProvider",
+            "type": "API",
+            "status": "\u2705 ACTIVE",
+            "has_key": true
+          }
+        ],
+        "web_providers": [
+          {
+            "name": "PerplexityWebProvider",
+            "type": "WEB",
+            "status": "\u2705 READY",
+            "cookies_setup": false
+          },
+          {
+            "name": "ChatGPTWebProvider",
+            "type": "WEB",
+            "status": "\u2705 READY",
+            "cookies_setup": false
+          },
+          {
+            "name": "GeminiWebProvider",
+            "type": "WEB",
+            "status": "\u2705 READY",
+            "cookies_setup": false
+          }
+        ],
+        "total_count": 8,
+        "working_count": 8,
+        "success_rate": 1.0
+      }
+    },
+    "content_queues": {
+      "success": true,
+      "results": {
+        "queue_files": [
+          {
+            "filename": "reddit_queue.json",
+            "exists": true,
+            "valid_json": true,
+            "has_required_fields": true,
+            "size_bytes": 404
+          },
+          {
+            "filename": "telegram_queue.json",
+            "exists": true,
+            "valid_json": true,
+            "has_required_fields": true,
+            "size_bytes": 337
+          },
+          {
+            "filename": "threads_queue.json",
+            "exists": true,
+            "valid_json": true,
+            "has_required_fields": true,
+            "size_bytes": 331
+          },
+          {
+            "filename": "instagram_queue.json",
+            "exists": true,
+            "valid_json": true,
+            "has_required_fields": true,
+            "size_bytes": 322
+          }
+        ],
+        "total_files": 4,
+        "valid_files": 4,
+        "missing_files": [],
+        "invalid_files": []
+      }
+    },
+    "configuration": {
+      "success": true,
+      "results": {
+        "config_files": [
+          {
+            "file": "accounts.env",
+            "exists": true,
+            "readable": true,
+            "api_keys_count": 4,
+            "platform_credentials": [
+              "reddit",
+              "telegram",
+              "instagram",
+              "threads",
+              "github"
+            ]
+          }
+        ]
+      }
+    },
+    "content_generation": {
+      "success": true,
+      "results": {
+        "test_type": "basic_file_operations",
+        "platform_tests": [
+          {
+            "platform": "reddit",
+            "file_write": true,
+            "file_read": true,
+            "json_valid": true
+          },
+          {
+            "platform": "telegram",
+            "file_write": true,
+            "file_read": true,
+            "json_valid": true
+          },
+          {
+            "platform": "threads",
+            "file_write": true,
+            "file_read": true,
+            "json_valid": true
+          },
+          {
+            "platform": "instagram",
+            "file_write": true,
+            "file_read": true,
+            "json_valid": true
+          }
+        ],
+        "success_count": 4
+      }
+    },
+    "code_quality": {
+      "success": true,
+      "results": {
+        "total_python_files": 741,
+        "syntax_errors": [],
+        "import_errors": [],
+        "files_checked": [
+          {
+            "file": "setup_cookies.py",
+            "syntax_valid": true,
+            "size_lines": 185
+          },
+          {
+            "file": "diagnostic_tool.py",
+            "syntax_valid": true,
+            "size_lines": 512
+          },
+          {
+            "file": "config/behavior_settings.py",
+            "syntax_valid": true,
+            "size_lines": 68
+          },
+          {
+            "file": "core/content_scheduler.py",
+            "syntax_valid": true,
+            "size_lines": 319
+          },
+          {
+            "file": "deployment/monitor.py",
+            "syntax_valid": true,
+            "size_lines": 243
+          },
+          {
+            "file": "deployment/run_daily.py",
+            "syntax_valid": true,
+            "size_lines": 107
+          },
+          {
+            "file": "deployment/enhanced_run_daily.py",
+            "syntax_valid": true,
+            "size_lines": 210
+          },
+          {
+            "file": "executors/enhanced_master_executor.py",
+            "syntax_valid": true,
+            "size_lines": 294
+          },
+          {
+            "file": "executors/master_executor.py",
+            "syntax_valid": true,
+            "size_lines": 354
+          },
+          {
+            "file": "llm_providers/base.py",
+            "syntax_valid": true,
+            "size_lines": 26
+          }
+        ]
+      }
+    }
+  }
+}

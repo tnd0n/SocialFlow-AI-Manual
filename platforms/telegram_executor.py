@@ -20,32 +20,74 @@ class TelegramExecutor(BasePlatform):
         self.authenticated = False
 
     async def authenticate(self) -> bool:
-        """Authenticate with Telegram using Telethon"""
+        """Authenticate with Telegram using bot token (non-interactive)"""
         try:
             self.api_id = int(os.getenv("TELEGRAM_API_ID"))
             self.api_hash = os.getenv("TELEGRAM_API_HASH")
             self.bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 
-            # Initialize Telethon client
-            self.client = TelegramClient('socialflow_session', self.api_id, self.api_hash)
+            if not self.bot_token:
+                self.logger.error("TELEGRAM_BOT_TOKEN not found in environment")
+                return False
 
-            # Start client (will prompt for phone verification first time)
-            await self.client.start()
+            # Initialize Telethon client with bot token (no phone verification needed)
+            self.client = TelegramClient('socialflow_bot_session', self.api_id, self.api_hash)
+
+            # Start client with bot token (non-interactive)
+            await self.client.start(bot_token=self.bot_token)
 
             # Verify authentication
             me = await self.client.get_me()
             self.authenticated = True
-            self.logger.info(f"Telegram authenticated as: {me.username or me.first_name}")
+            self.logger.info(f"Telegram bot authenticated as: {me.username or me.first_name}")
             return True
 
         except Exception as e:
             self.logger.error(f"Telegram authentication failed: {e}")
-            return False
+            # Try fallback with session file if bot auth fails
+            try:
+                # Check if session file exists and try user authentication
+                session_path = "accounts/telegram_session.session"
+                phone = os.getenv("TELEGRAM_PHONE")
+                
+                if os.path.exists(session_path) and phone:
+                    self.client = TelegramClient(session_path, self.api_id, self.api_hash)
+                    await self.client.start(phone=phone)
+                    me = await self.client.get_me()
+                    self.authenticated = True
+                    self.logger.info(f"Telegram user authenticated as: {me.username or me.first_name}")
+                    return True
+                else:
+                    self.logger.warning("No existing session file found and phone not provided")
+                    return False
+                    
+            except Exception as fallback_error:
+                self.logger.error(f"Telegram fallback authentication failed: {fallback_error}")
+                # Try to connect to existing session without phone if it exists
+                try:
+                    session_path = "accounts/telegram_session.session"
+                    if os.path.exists(session_path):
+                        self.client = TelegramClient(session_path, self.api_id, self.api_hash)
+                        await self.client.connect()
+                        if await self.client.is_user_authorized():
+                            me = await self.client.get_me()
+                            self.authenticated = True
+                            self.logger.info(f"Telegram session restored: {me.username or me.first_name}")
+                            return True
+                except Exception as session_error:
+                    self.logger.error(f"Session restore failed: {session_error}")
+                
+                return False
 
     async def post_content(self, content: Dict[str, Any]) -> Dict[str, Any]:
         """Send message to Telegram groups/channels"""
         if not self.authenticated:
-            await self.authenticate()
+            auth_success = await self.authenticate()
+            if not auth_success:
+                return {
+                    "status": "failed",
+                    "error": "Authentication failed - check Telegram API credentials"
+                }
 
         results = []
 
@@ -110,9 +152,16 @@ class TelegramExecutor(BasePlatform):
             return {"status": "failed", "error": str(e)}
 
     async def join_group(self, group_link: str) -> Dict[str, Any]:
-        """Join a Telegram group/channel"""
+        """Join a Telegram group/channel (Note: Not supported for bot accounts)"""
         if not self.authenticated:
             await self.authenticate()
+
+        # Check if using bot authentication (bots cannot self-join groups)
+        if self.bot_token:
+            return {
+                "status": "failed",
+                "error": "Bot accounts cannot join groups automatically. Manual addition required."
+            }
 
         try:
             # Extract username from link

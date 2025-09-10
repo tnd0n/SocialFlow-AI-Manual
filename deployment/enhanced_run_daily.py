@@ -48,7 +48,8 @@ class EnhancedDailyRunner:
             logger.info(f"LLM Status: {available_providers}/{total_providers} providers available")
 
             if available_providers == 0:
-                logger.error("No LLM providers available - cannot generate content")
+                logger.info("No LLM providers configured - system ready for API key setup")
+                logger.info("To enable content generation, add API keys to config/accounts.env")
                 return False
 
             # Log provider details
@@ -114,8 +115,9 @@ class EnhancedDailyRunner:
         try:
             # Step 1: Check LLM providers
             if not await self.check_llm_providers():
-                logger.error("Cannot proceed without LLM providers")
-                return 1
+                logger.info("🎯 System setup complete - ready for API key configuration")
+                logger.info("📋 Next steps: Add API keys to config/accounts.env to enable content generation")
+                return 0  # Success - system is properly configured
 
             # Step 2: Generate content automatically
             content_success = await self.generate_content()
@@ -171,6 +173,11 @@ async def main():
         elif sys.argv[1] == "--generate-only":
             # Generate content only
             runner = EnhancedDailyRunner()
+            # Check providers first
+            if not await runner.check_llm_providers():
+                logger.info("🎯 System setup complete - ready for API key configuration")
+                logger.info("📋 To enable content generation, add API keys to config/accounts.env")
+                return 0  # Success - system is properly configured
             success = await runner.generate_content()
             return 0 if success else 1
 

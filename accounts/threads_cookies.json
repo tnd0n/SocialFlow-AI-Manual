@@ -1,0 +1,52 @@
+[
+  {
+    "name": "ig_did",
+    "value": "D0C71894-9E9B-4F98-A049-4057342A0FB8",
+    "domain": ".threads.net",
+    "path": "/",
+    "expires": 1789064248.437086,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "ps_l",
+    "value": "0",
+    "domain": ".threads.net",
+    "path": "/",
+    "expires": 1792088248.437222,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ps_n",
+    "value": "0",
+    "domain": ".threads.net",
+    "path": "/",
+    "expires": 1792088248.43724,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "csrftoken",
+    "value": "I5z2CVLvg7eLGgFv1KouOJ",
+    "domain": ".threads.com",
+    "path": "/",
+    "expires": 1792088248.605697,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "ig_did",
+    "value": "5FD18373-59B9-4B8D-B2C6-071BE08CB4A1",
+    "domain": ".threads.com",
+    "path": "/",
+    "expires": 1789064248.605765,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  }
+]
