@@ -1,0 +1,99 @@
+# SocialFlow AI - Git Ignore Rules
+
+# Credentials and secrets
+config/accounts.env
+*.env
+!.env.example
+!*_template.env
+
+# Session files and cookies
+accounts/*.json
+accounts/*.session
+*.session
+*.session-journal
+
+# Logs and temporary files
+*.log
+logs/*.log
+execution.log
+daily_execution.log
+
+# Screenshots and media
+screenshots/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.mov
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.tmp
+
+# Archive files (keep structure, not content)
+archive/*.json
+!archive/.gitkeep
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# API response cache
+.cache/
+cache/
+
+# Docker
+.dockerignore
