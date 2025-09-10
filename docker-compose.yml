@@ -1,0 +1,39 @@
+# SocialFlow AI - Docker Compose Configuration
+version: '3.8'
+
+services:
+  socialflow-ai:
+    build: .
+    container_name: socialflow-ai
+    restart: unless-stopped
+
+    # Mount volumes for persistent data
+    volumes:
+      - ./accounts:/app/accounts
+      - ./archive:/app/archive
+      - ./logs:/app/logs
+      - ./content_queue:/app/content_queue
+      - ./config:/app/config
+
+    # Environment variables (override in .env file)
+    environment:
+      - TZ=Asia/Kolkata
+      - PYTHONUNBUFFERED=1
+
+    # Run daily at 10 AM (using cron in container)
+    command: >
+      sh -c "
+        echo '0 10 * * * cd /app && python deployment/run_daily.py' | crontab - &&
+        cron -f
+      "
+
+  # Optional: Web dashboard for monitoring
+  dashboard:
+    image: nginx:alpine
+    container_name: socialflow-dashboard
+    ports:
+      - "8080:80"
+    volumes:
+      - ./logs:/usr/share/nginx/html/logs:ro
+      - ./EXECUTION_LOG.md:/usr/share/nginx/html/execution.md:ro
+    restart: unless-stopped
