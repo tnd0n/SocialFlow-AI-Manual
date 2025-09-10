@@ -1,4 +1,4 @@
-# SocialFlow AI - Python Dependencies
+# SocialFlow AI - Enhanced Python Dependencies with Web Automation
 
 # Core automation libraries
 asyncio-throttle==1.0.2
@@ -10,29 +10,42 @@ praw==7.7.1                    # Reddit API
 telethon==1.29.3              # Telegram API
 instagrapi==2.0.0             # Instagram API
 
-# Web automation  
-playwright==1.40.0            # Browser automation for Threads
+# Web automation for LLM providers
+playwright==1.40.0            # Browser automation for Perplexity, ChatGPT, Gemini
 selenium==4.15.2              # Backup web automation
+beautifulsoup4==4.12.2        # HTML parsing
+lxml==4.9.3                   # XML/HTML processing
 
-# AI/ML libraries (optional - for local content generation)
+# AI/ML libraries
 openai==1.3.7                 # OpenAI API
 google-generativeai==0.3.2   # Google Gemini API
 requests==2.31.0             # HTTP requests
+
+# Enhanced LLM provider rotation
+tenacity==8.2.3              # Retry logic with exponential backoff
+ratelimit==2.2.1             # Rate limiting decorators
 
 # Data handling
 pandas==2.1.3                # Data analysis
 numpy==1.25.2                # Numerical computing
 python-dotenv==1.0.0         # Environment variables
+pyyaml==6.0.1                # YAML configuration files
 
 # Utilities
 schedule==1.2.0              # Task scheduling
 python-crontab==3.0.0        # Cron job management
 pytz==2023.3                 # Timezone handling
 colorlog==6.7.0              # Colored logging
+click==8.1.7                 # CLI interface
 
 # Security & encryption
 cryptography==41.0.7         # Encrypt sensitive data
 keyring==24.3.0              # Secure credential storage
+
+# Content processing
+emoji==2.8.0                 # Emoji handling
+textblob==0.17.1             # Text processing
+python-dateutil==2.8.2      # Date parsing
 
 # Development & testing
 pytest==7.4.3               # Testing framework
@@ -40,6 +53,13 @@ pytest-asyncio==0.21.1      # Async testing
 black==23.10.1              # Code formatting
 flake8==6.1.0               # Code linting
 
-# Optional: Image/media processing
+# Optional: Image/media processing for Instagram
 Pillow==10.1.0              # Image processing
 moviepy==1.0.3              # Video processing (for Instagram posts)
+
+# Database (optional for advanced features)
+aiosqlite==0.19.0          # Async SQLite
+sqlalchemy==2.0.23         # SQL ORM
+
+# Monitoring and metrics
+psutil==5.9.6              # System monitoring
