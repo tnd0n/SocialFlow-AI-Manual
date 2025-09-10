@@ -1,0 +1,13 @@
+{
+  "telegram_messages": [
+    {
+      "target_groups": ["@trading_algorithms", "@python_trading"],
+      "content": "Message content from Perplexity analysis...",
+      "timing": "evening",
+      "include_media": false,
+      "reply_to_message": null
+    }
+  ],
+  "execution_status": "pending", 
+  "created_at": "2025-09-10T20:00:00Z"
+}
