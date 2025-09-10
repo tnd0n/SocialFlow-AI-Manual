@@ -1,0 +1,13 @@
+{
+  "threads_posts": [
+    {
+      "content": "Thread content with hashtags from Perplexity...",
+      "hashtags": ["#AI", "#Trading", "#OpenSource"],
+      "timing": "afternoon",
+      "thread_length": "single",
+      "engagement_target": "high"
+    }
+  ],
+  "execution_status": "pending",
+  "created_at": "2025-09-10T20:00:00Z"
+}
