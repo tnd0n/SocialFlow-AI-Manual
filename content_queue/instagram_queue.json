@@ -1,0 +1,13 @@
+{
+  "instagram_targets": [
+    {
+      "account": "@target_account",
+      "recent_post_keyword": "automation",
+      "comment": "Strategic comment adding value...",
+      "timing": "within_2_hours",
+      "engagement_goal": "visibility"
+    }
+  ],
+  "execution_status": "pending",
+  "created_at": "2025-09-10T20:00:00Z"
+}
